@@ -27,7 +27,6 @@ services:
     volumes:
       - ./:/usr/src/app
       - gems:/usr/local/bundle
-    ports:
     environment:
       - POSTGRES_HOST=pg
       - POSTGRES_USER=postgres
