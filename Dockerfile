@@ -6,7 +6,8 @@ RUN apk add --update --no-cache \
       nodejs \
       sqlite-dev \
       tzdata \
-      postgresql-dev
+      postgresql-dev \
+      postgresql-client
 
 RUN gem install bundler:2.0.2
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+cd "$(dirname "$0")/.."
+
+set -ex
+
+script/update
+
+docker-compose run --rm app bin/rspec spec/
