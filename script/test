@@ -3,6 +3,9 @@ cd "$(dirname "$0")/.."
 
 set -ex
 
-script/update
+if [ -z "${FAST}" ]; then
+  script/update
+fi
 
-docker-compose run --rm app bin/rspec spec/
+docker-compose up -d
+docker-compose exec app bin/rspec spec/

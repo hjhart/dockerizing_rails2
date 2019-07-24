@@ -3,6 +3,9 @@ cd "$(dirname "$0")/.."
 
 set -ex
 
-script/update
+if [ -z "${FAST}" ]; then
+  script/update
+fi
 
+docker-compose up -d
 docker-compose exec app rails console
