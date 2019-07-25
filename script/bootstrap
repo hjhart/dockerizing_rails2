@@ -8,4 +8,4 @@ if [ -z "${SKIP_BUILD}" ]; then
 fi
 
 docker-compose run --rm app bin/bundle
-docker-compose run --rm app yarn
+# docker-compose run --rm app yarn
