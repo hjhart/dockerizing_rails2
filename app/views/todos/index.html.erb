@@ -2,19 +2,27 @@
   <div class="col-md-6">
     <br><br>
 
-    <table class="table">
+    <table class="table table-hover">
       <thead>
         <tr>
-          <th colspan="3">Todos</th>
+          <th colspan="2">
+            <ul class="nav nav-pills">
+              <% ["all_todos", "active", "completed"].each do |filter| %>
+                <li class="nav-item">
+                  <%= link_to filter_names[filter], todos_path(filter: filter), class: "nav-link #{current_filter == filter ? "active" : ""}" %>
+                </li>
+              <% end %>
+            </ul>
+          </th>
         </tr>
       </thead>
 
       <tbody>
         <% @todos.each do |todo| %>
           <tr>
-            <td><%= check_box_tag dom_id(todo, :checkbox), nil, todo.completed?, data: { url: todo_path(todo, filter: current_filter, todo: { completed: !todo.completed }), remote: :true, method: :patch } %> </td>
-            <td><%= todo.title %></td>
-            <td><%= link_to 'Delete', todo_path(todo, filter: current_filter), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="todo-checkbox"> <%= check_box_tag dom_id(todo, :checkbox), nil, todo.completed?, data: { url: todo_path(todo, filter: current_filter, todo: { completed: !todo.completed }), remote: :true, method: :patch } %> </td>
+            <td> <%= todo.title %> </td>
+            <td class="text-right"><%= link_to 'Delete', todo_path(todo, filter: current_filter), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
@@ -22,15 +30,6 @@
   </div>
 
   <div class="col-md-4 offset-md-2">
-    <br><br>
-    <ul class="nav nav-pills">
-      <% ["all_todos", "active", "completed"].each do |filter| %>
-        <li class="nav-item">
-          <%= link_to filter_names[filter], todos_path(filter: filter), class: "nav-link #{current_filter == filter ? "active" : ""}" %>
-        </li>
-      <% end %>
-    </ul>
-
     <br><br>
 
     <%= render 'form', todo: Todo.new %>
